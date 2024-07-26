@@ -15,4 +15,5 @@ This repository contains two jupyter notebooks namely sales_forecast.ipynb and s
 First We will start from sales_forecast.ipynb
 ### Data preprocessing and cleaning
 This Data does not require much cleaning and preprocessing except oil price data, while checking for missing values, It is found that oil price dataset has 43 missing values. in order to judge the method to handle null values oil price variation is visualized and it is pretty evident that recent previous non null value of oil price is appropriate to fill in place of null values, this strategy is called backfill strategy.
-
+![download](https://github.com/user-attachments/assets/6f0b9bc2-90b6-474e-825d-0a0975c94254)
+### Exploratory data analysis
