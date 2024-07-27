@@ -19,4 +19,8 @@ This Data does not require much cleaning and preprocessing except oil price data
 ### Exploratory data analysis
 * Total sales per family is shown below, It is clearly visible that GroceryI, Produce and beverages are most sold families.
 ![download](https://github.com/user-attachments/assets/ff0a41a5-7e4f-4d4e-a59b-6c3f1d7beba1)
-* 
+
+* If we want to know the about the cities where sales are high.
+![download](https://github.com/user-attachments/assets/0b2e0ba9-3899-4fce-a925-25a9250f11c7)
+* Average sales in States can be seen below
+![download](https://github.com/user-attachments/assets/1df681a7-d5ce-4bfc-a7c1-1895a9cf6f69)
