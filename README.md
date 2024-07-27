@@ -17,3 +17,6 @@ First We will start from sales_forecast.ipynb
 This Data does not require much cleaning and preprocessing except oil price data, while checking for missing values, It is found that oil price dataset has 43 missing values. in order to judge the method to handle null values oil price variation is visualized and it is pretty evident that recent previous non null value of oil price is appropriate to fill in place of null values, this strategy is called backfill strategy.
 ![download](https://github.com/user-attachments/assets/6f0b9bc2-90b6-474e-825d-0a0975c94254)
 ### Exploratory data analysis
+* Total sales per family is shown below, It is clearly visible that GroceryI, Produce and beverages are most sold families.
+![download](https://github.com/user-attachments/assets/ff0a41a5-7e4f-4d4e-a59b-6c3f1d7beba1)
+* 
