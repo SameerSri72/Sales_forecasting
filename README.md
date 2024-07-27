@@ -35,3 +35,16 @@ Dataset contains a column named *onpromotion* it takes value 0 when promotional 
 ### Null Hypo: Earthquake does not have a significant impact on sales.<br>**Alternate hypo**: Earthquake have a significant impact on sales.<br>
 As distribution of sales is nowhere close to normal so we can not use t test to compare sales before and after earthquake happened hence we use Mann-Whitney U test which is a non parametric equvivalent of t test. the result is Null hypothesis getting rejected hence Earthquake had a significant impact on sales.<br>
 ![download](https://github.com/user-attachments/assets/20a77715-bb1c-4ed8-9471-bfb221e5b3aa)
+
+**Monthly, weakly and yearly sales are represented below**<br>
+![download](https://github.com/user-attachments/assets/f3d38cdc-3519-4ab3-a333-65b02101cdc9)<br>
+![download](https://github.com/user-attachments/assets/7bb6e39b-3685-4942-9bf0-fcb91c2a6b23)<br>
+![download](https://github.com/user-attachments/assets/cd2d46b2-5025-4e16-a42e-bb96f3941394)<br>
+## Forecasting through Machine Learning models:
+### Feature Engineering:
+To make the dataset suitable for machine learning models following steps are taken (details can be seen in jupyetr notebook):
+* Unnecessary Columns like date,id,  locale, locale_name, description, store_type, transferred, state from merged dataset.
+* 7 categories are defined such as food_families, home_families, clothing_families etc to categorize the families present in data.
+* sales, no. of transactions and oil price have numerical values so standard scaling is done to nullify the different units.
+* Categorical Variables are one hot encoded.
+  
