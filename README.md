@@ -93,8 +93,44 @@ SARIMA model is being built by taking the following parameters:<br>
 6. Q = 0 (Sale does not depend upon the error of previous 7th day)
 7. s = 7 (period of seasonality)<br>
 Based on AIC criteria the best model parameters are found out to be p=6.0, d=0.0, q=0.0, P=1.0, D=1.0, Q=0.0, s=7.0, with AIC=38882.61 <br>
-After prediction the RMSLE value turn out to be 0.112, To visually see the model performance actual vs predicted value plot is being made.<br>
+After prediction the RMSLE value turn out to be 0.112, interpretation of RMSLE = 0.112 means on an average the log of the predicted values are 11.2 % off from the log of actual values.To visually see the model performance actual vs predicted value plot is being made.<br>
 ![download](https://github.com/user-attachments/assets/81d22d9f-9129-4895-a696-b77b5b985703)<br>
 As we can see initially model performs satisfactorily but at the end not able to adapt as desired hence the gap between actual and predicted values.
+### Using Auto ARIMA:
+Using Auto ARIMA with parameters seasonal= True and m=7(weekly seasonality), Auto ARIMA gives model ARIMA(5,1,1)(2,0,2)(7) so values of p,d,q,P,D,Q and s are 5,1,1,2,0,2 and 7.<br>
+The RMSLE for this model turned out to be 0.10 and to visually see the model performance here also actual vs predicted plot is made.<br>
+![download](https://github.com/user-attachments/assets/7bcb588a-0bac-4f53-b536-b25014fffb28)<br>
+Here also model performs satisfactorily for the initial data and at the end specially around time 15-20 and 25-30, there is a huge gap between actula and predicted values.<br>
+
+# Using Facebook Prophet for forecasting:
+## Total sales across all stores familywise:
+### Automotive:
+![download](https://github.com/user-attachments/assets/b0e9cd5b-c280-41ed-a2e3-a36cfcf17a34)
+### Beverages:
+![download](https://github.com/user-attachments/assets/b220f142-b907-42d9-86fc-2165fb0f80af)
+### Books:
+![download](https://github.com/user-attachments/assets/966f9577-61e1-46f1-9bdf-62950ed8a3c4)
+### Dairy:
+![download](https://github.com/user-attachments/assets/88261307-842a-48c3-aa82-aa73ab8444b8)
+for other families plot can be seen in sale_prophet.ipynb. As it is visible that different families give different kind of plots for several plots like dairy, automotive, grocery etc sales in the starting of the year is very low, for books sales is 0 till 2016. similarly other plots can also be interpreted.<br>
+for certain families data is negligible before 2015, hence data after 2015 will be used here for model building.
+### Data cleaning:
+Following steps are taken for the data cleaning:
+1. Only those columns are kept in the dataframe where avg sales is greater than 1000.
+2. Removing outliers by using Z score which means we calculate z score for each value in the column, z score indicates how many std dev away the value lies from the mean. we put the condition z>2.7 because 99.7% data lies under 3 std dev. Any value which lies outside 2.7 is considered as an outlier and removed.<br>
+After cleaning data for different families is plotted again, some of the plots are shown below:<br>
+### Beverages:
+![download](https://github.com/user-attachments/assets/9293393e-e735-4129-928d-d9aacef7e8ae)
+### Dairy:
+![download](https://github.com/user-attachments/assets/5fa47fa6-fc6f-4a15-a436-b9347446ade3)
+### Grocery II:
+![download](https://github.com/user-attachments/assets/1dd70dc3-6755-4a71-a794-99731b4701b8)<br>
+The one advantage in fb prophet is we can utilize holiday data, we can define a window around holiday and incorporate into our model which leads to better forcasting. plots for each column is in the notebook, some references are given below: <br>
+![download](https://github.com/user-attachments/assets/a5466706-87f6-4ea0-b991-d2d046cbd71c)<br>
+![download](https://github.com/user-attachments/assets/181dcffa-ff90-4a6a-ac27-dd1c3369a3ea)<br>
+As one can see in the first plot, less sales at the starting of each year is captured by the model.(black dot represents actual data and blue lines represent prediction)
+
+
+
 
  
