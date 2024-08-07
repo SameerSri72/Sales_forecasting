@@ -47,4 +47,54 @@ To make the dataset suitable for machine learning models following steps are tak
 * 7 categories are defined such as food_families, home_families, clothing_families etc to categorize the families present in data.
 * sales, no. of transactions and oil price have numerical values so standard scaling is done to nullify the different units.
 * Categorical Variables are one hot encoded.
-  
+## Models:
+### Polynomial regression
+With degree equals to 1, only intercept term is added to data so it is a linear regression to be precise. MSE turned out to be 0.70
+### Random forest regression
+Parammeter n_estimator is taken as 100 so random forest will use 100 decision trees, results for this are RMSLE = 0.22,	RMSE = 0.71,	MSE = 0.51,	MAE=0.24.
+### Histogram based gradient boost
+Results are Model	RMSLE = 0.22,	RMSE = 0.62,	MSE = 0.39,	MAE = 0.26
+## Time series forecasting models:
+Now We will build Sarima model for forecasting, Data need to be transformed in the following way for this model to apply:<br>
+At first total sales for each family is found and total sales is grouped on family. we take top 10 family where sales are high for the prediction. these families are:
+1. GROCERY I        
+2. BEVERAGES        
+3. PRODUCE          
+4. CLEANING         
+5. DAIRY            
+6. BREAD/BAKERY     
+7. POULTRY          
+8. MEATS            
+9. PERSONAL CARE    
+10. DELI<br>
+to predict for each family, we need to build seperate models for each family, here we only build for Grocery I and for the other categories same approach can be taken.
+AFter filtering out the daily data for sales of Grocery I, it is plotted to observe for trend, seasonality etc.
+![download](https://github.com/user-attachments/assets/a2c08e6b-3423-477b-85e8-086a4a4babe1) <br>
+As it is visible from the plot that at the starting of each year sale is very less and between the year 2016 and 2017 there is a sudden peak in the sale as well, we have the information regarding occurence of earth on 16 april 2016, so this sudden increment in sale is an effect of this as being tested in hypothesis testing section. slight upward trend is there but it is not very significant.
+### Testing stationarity of data using Augmented dickey fuller (ADF) test:
+Stationarity means that the statistical properties of the series like mean, variance, and autocorrelation are constant over time. A stationary time series is crucial for many time series forecasting models as they assume the underlying data is stationary.<br>
+**Null Hypothesis (H0):** The time series has a unit root, meaning it is non-stationary.<br>
+**Alternate Hypothesis (H1):** The time series does not have a unit root, meaning it is stationary.<br>
+If the p-value is less than a chosen significance level (commonly 0.05), the null hypothesis is rejected, indicating the series is stationary.<br>
+After performing the test the value of test statistic is found out to be -3.45 and p value is 0.009. Hence Null Hypothesis is rejected which leads to conclusion that data is stationary.
+### ACF and PACF plots:
+ACF and PACF plot for the grocery sales is given below:<br>
+![download](https://github.com/user-attachments/assets/129e18d4-b658-4da3-9c4c-a8cf06b8c18b)<br>
+![download](https://github.com/user-attachments/assets/c4d820bc-a8dd-4235-9dc5-e85338c77893)<br>
+
+ACF plot reveals the periodic pattern with period 7, which leads to conclusion that weekly seasonality is present in the data, which is also visible rfom PACF plot as well.<br>
+### Building SARIMA model:
+SARIMA model is being built by taking the following parameters:<br>
+1. p_range = range(1, 9) (for the Autoregressive part)
+2. d = 0 
+3. q = 0 (no dependency on previous error terms so Moving Average part is 0)
+4. P = 1 (current sale depends upon the previous 7th day)
+5. D_range = range(1, 4) 
+6. Q = 0 (Sale does not depend upon the error of previous 7th day)
+7. s = 7 (period of seasonality)<br>
+Based on AIC criteria the best model parameters are found out to be p=6.0, d=0.0, q=0.0, P=1.0, D=1.0, Q=0.0, s=7.0, with AIC=38882.61 <br>
+After prediction the RMSLE value turn out to be 0.112, To visually see the model performance actual vs predicted value plot is being made.<br>
+![download](https://github.com/user-attachments/assets/81d22d9f-9129-4895-a696-b77b5b985703)<br>
+As we can see initially model performs satisfactorily but at the end not able to adapt as desired hence the gap between actual and predicted values.
+
+ 
